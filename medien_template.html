@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Wellen – Musterseite (Template)</title>
+  <link rel="stylesheet" href="wellen_template.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="side-head">
+        <div class="badge"><span class="dot"></span> Interaktives Heft – Muster</div>
+        <div class="side-title">Wellen – Kapitelvorlage</div>
+        <p class="side-sub">Vorlage mit wiederverwendbaren Bausteinen: Info-Block, Multiple Choice, Drag-&-Drop-Lückentext, Freitext mit Auto-Speichern.</p>
+      </div>
+      <nav class="nav">
+        <a href="#kapitel-1"><span>Kapitel 1</span><small>Info</small></a>
+        <a href="#quiz-1"><span>Multiple Choice</span><small>Check</small></a>
+        <a href="#cloze-1"><span>Lückentext</span><small>Drag</small></a>
+        <a href="#notizen"><span>Notizen</span><small>Save</small></a>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <div>
+          <h1>Wellen – Musterseite</h1>
+          <div class="meta">HTML + externe CSS/JS (keine weiteren Abhängigkeiten)</div>
+        </div>
+        <div class="row">
+          <span class="pill">Bausteine</span>
+          <button class="btn" id="resetAllBtn" type="button">Alles zurücksetzen</button>
+        </div>
+      </div>
+
+      <div class="grid">
+
+        <section class="block" id="kapitel-1">
+          <div class="block-head">
+            <div>
+              <h2>Arbeitsauftrag (Musterblock)</h2>
+              <p>Hier kommt später dein Inhalt hin. Der Block ist als wiederverwendbare „Karte“ gedacht (Überschrift + kurzer Hinweis + Body).</p>
+            </div>
+            <span class="pill">Info</span>
+          </div>
+          <div class="block-body">
+            <ul>
+              <li>Kurzer Auftrag 1 (Platzhalter)</li>
+              <li>Kurzer Auftrag 2 (Platzhalter)</li>
+              <li>Kurzer Auftrag 3 (Platzhalter)</li>
+            </ul>
+            <p class="note">Tipp: Du kannst jeden Block kopieren und nur die IDs/Überschriften ändern.</p>
+          </div>
+        </section>
+
+        <section class="block" id="quiz-1">
+          <div class="block-head">
+            <div>
+              <h2>Multiple Choice (mit Überprüfung)</h2>
+              <p>Unterstützt Single-Choice (Radio) und Multiple-Select (Checkbox). Richtige Antworten werden nach Klick auf „Überprüfen“ markiert.</p>
+            </div>
+            <span class="pill">Quiz</span>
+          </div>
+          <div class="block-body">
+            <script type="application/json" class="mcq-config">
+            {
+              "title": "Wiederholung (Beispiel)",
+              "questions": [
+                {
+                  "text": "Welche Aussage passt?",
+                  "multiple": false,
+                  "choices": [
+                    {"id":"a","label":"Eine Welle transportiert Materie dauerhaft."},
+                    {"id":"b","label":"Eine Welle transportiert Energie."},
+                    {"id":"c","label":"Eine Welle ist immer sichtbar."}
+                  ],
+                  "correct": ["b"],
+                  "explain": "Wellen transportieren Energie/Information; Teilchen schwingen meist um eine Ruhelage."
+                },
+                {
+                  "text": "Kreuze alle richtigen Antworten an:",
+                  "multiple": true,
+                  "choices": [
+                    {"id":"a","label":"Amplitude beschreibt die maximale Auslenkung."},
+                    {"id":"b","label":"Frequenz ist die Anzahl Schwingungen pro Sekunde."},
+                    {"id":"c","label":"Periode und Frequenz sind unabhängig voneinander."}
+                  ],
+                  "correct": ["a","b"],
+                  "explain": "Es gilt f = 1/T. Periode und Frequenz hängen zusammen."
+                }
+              ]
+            }
+            </script>
+
+            <div class="mcq" data-mcq></div>
+
+            <div class="row">
+              <button class="btn primary" type="button" data-mcq-check>Überprüfen</button>
+              <button class="btn" type="button" data-mcq-reset>Zurücksetzen</button>
+              <div class="score" data-mcq-score aria-live="polite"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="block" id="cloze-1">
+          <div class="block-head">
+            <div>
+              <h2>Lückentext (Drag & Drop)</h2>
+              <p>Wörter aus der Wortbank in die Lücken ziehen. Jede Lücke hat eine korrekte Lösung (data-answer). Mit „Überprüfen“ werden Lücken markiert.</p>
+            </div>
+            <span class="pill">Cloze</span>
+          </div>
+
+          <div class="block-body cloze" data-cloze>
+            <div class="bank" data-bank aria-label="Wortbank">
+              <div class="chip" draggable="true" data-token="Energie">Energie</div>
+              <div class="chip" draggable="true" data-token="Amplitude">Amplitude</div>
+              <div class="chip" draggable="true" data-token="Frequenz">Frequenz</div>
+              <div class="chip" draggable="true" data-token="Periode">Periode</div>
+            </div>
+
+            <div class="text" aria-label="Lückentext">
+              Eine Welle transportiert <span class="gap" data-answer="Energie" aria-label="Lücke 1"></span>.
+              Die <span class="gap" data-answer="Amplitude" aria-label="Lücke 2"></span> ist die maximale Auslenkung.
+              Die <span class="gap" data-answer="Frequenz" aria-label="Lücke 3"></span> gibt Schwingungen pro Sekunde an.
+              Die <span class="gap" data-answer="Periode" aria-label="Lücke 4"></span> ist die Dauer einer Schwingung.
+              <div class="drop-hint">Hinweis: Klicke auf ein eingesetztes Wort, um es zurück in die Wortbank zu legen.</div>
+            </div>
+
+            <div class="row">
+              <button class="btn primary" type="button" data-cloze-check>Überprüfen</button>
+              <button class="btn" type="button" data-cloze-reset>Zurücksetzen</button>
+              <div class="score" data-cloze-score aria-live="polite"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="block" id="notizen">
+          <div class="block-head">
+            <div>
+              <h2>Notizen / Ergebnisse</h2>
+              <p>Freitextfelder speichern automatisch im Browser (LocalStorage). Ideal als „Ergebnisdatei“ pro Schülergerät.</p>
+            </div>
+            <span class="pill">Save</span>
+          </div>
+          <div class="block-body">
+            <div class="field">
+              <label for="name">Name</label>
+              <input id="name" type="text" data-autosave="wellen_name" placeholder="Vorname Nachname" />
+              <div class="tiny">Wird automatisch gespeichert.</div>
+            </div>
+
+            <div class="hr"></div>
+
+            <div class="field">
+              <label for="notes1">Ergebnisse (Beispiel)</label>
+              <textarea id="notes1" data-autosave="wellen_notes1" placeholder="Schreibe hier deine Antworten / Beobachtungen..."></textarea>
+              <div class="tiny">Tipp: Du kannst pro Aufgabe ein eigenes Feld anlegen (kopieren, data-autosave Key anpassen).</div>
+            </div>
+
+            <div class="row">
+              <button class="btn" type="button" data-export>Als .txt exportieren</button>
+              <button class="btn" type="button" data-clear-saved>Gespeichertes löschen</button>
+              <div class="score" data-save-status aria-live="polite"></div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="wellen_template.js"></script>
+</body>
+</html>
